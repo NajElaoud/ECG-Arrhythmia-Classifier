@@ -1,7 +1,7 @@
 """
-ECG AI Project - Complete Starter Code with Proper Class Balancing
+ECG AI Project - Complete Code with Proper Class Balancing
 Dataset: PTB-XL (automatically downloaded)
-Models: CNN, LSTM, and hybrid architectures included
+Models: CNN, LSTM, and hybrid architectures included (using CUDA or CPU)
 """
 
 import os
@@ -337,7 +337,7 @@ class Hybrid_CNN_LSTM(nn.Module):
 # STEP 5: Training Functions
 # ============================================
 
-def train_model(model, train_loader, val_loader, num_epochs=50, lr=0.001, device='cuda'):
+def train_model(model, train_loader, val_loader, num_epochs=50, lr=0.001, device='cuda', model_name='best_ecg_model'):
     """
     Train the model
     """
@@ -387,7 +387,11 @@ def train_model(model, train_loader, val_loader, num_epochs=50, lr=0.001, device
         # Save best model
         if val_loss < best_val_loss:
             best_val_loss = val_loss
-            torch.save(model.state_dict(), 'best_ecg_model.pth')
+            # Ensure model directory exists and save
+            model_dir = os.path.join('results', 'models')
+            os.makedirs(model_dir, exist_ok=True)
+            model_path = os.path.join(model_dir, f"{model_name}.pth")
+            torch.save(model.state_dict(), model_path)
     
     return train_losses, val_losses
 
@@ -623,20 +627,27 @@ if __name__ == "__main__":
     
     if model_choice == 1:
         model = CNN_ECG(num_classes=len(target_classes), num_leads=12).to(device)
+        model_type = 'cnn'
         print("Using CNN model")
     elif model_choice == 2:
         model = LSTM_ECG(num_classes=len(target_classes), num_leads=12).to(device)
+        model_type = 'lstm'
         print("Using LSTM model")
     else:
         model = Hybrid_CNN_LSTM(num_classes=len(target_classes), num_leads=12).to(device)
+        model_type = 'hybrid'
         print("Using Hybrid CNN-LSTM model")
     
     # Check if model already exists
     SKIP_TRAINING = False  # Set to True to skip training and load existing model
-    
-    if SKIP_TRAINING and os.path.exists('best_ecg_model.pth'):
+    # model path under results/models (per model type)
+    model_dir = os.path.join('results', 'models')
+    model_name = f"best_ecg_model_{model_type}"
+    model_path = os.path.join(model_dir, f"{model_name}.pth")
+
+    if SKIP_TRAINING and os.path.exists(model_path):
         print("\n=== Loading Pre-trained Model ===")
-        model.load_state_dict(torch.load('best_ecg_model.pth', map_location=device))
+        model.load_state_dict(torch.load(model_path, map_location=device))
         print("Model loaded successfully!")
         train_losses = []
         val_losses = []
@@ -648,8 +659,9 @@ if __name__ == "__main__":
         
         # Train
         train_losses, val_losses = train_model(
-            model, train_loader, val_loader, 
-            num_epochs=NUM_EPOCHS, lr=LEARNING_RATE, device=device
+            model, train_loader, val_loader,
+            num_epochs=NUM_EPOCHS, lr=LEARNING_RATE, device=device,
+            model_name=model_name
         )
         
         # Clear GPU cache after training
@@ -663,8 +675,8 @@ if __name__ == "__main__":
     print("\n" + "="*60)
     print("STEP 7: EVALUATING ON TEST SET")
     print("="*60)
-    if not SKIP_TRAINING or not os.path.exists('best_ecg_model.pth'):
-        model.load_state_dict(torch.load('best_ecg_model.pth', map_location=device))
+    if not SKIP_TRAINING or not os.path.exists(model_path):
+        model.load_state_dict(torch.load(model_path, map_location=device))
     predictions, labels, binary_preds = evaluate_model(model, test_loader, target_classes, device)
     
     # Step 9: Plot confusion matrices
@@ -673,7 +685,7 @@ if __name__ == "__main__":
     print("\n" + "="*60)
     print("TRAINING COMPLETE")
     print("="*60)
-    print(f"Model saved as: best_ecg_model.pth")
+    print(f"Model saved as: {model_path}")
     print(f"Number of classes: {len(target_classes)}")
     print(f"Classes: {', '.join(target_classes)}")
     
@@ -685,5 +697,6 @@ if __name__ == "__main__":
         model=model,
         test_loader=test_loader,
         device=device,
-        num_detailed=2  # Number of detailed dashboards
+        num_detailed=2,  # Number of detailed dashboards
+        output_dir=os.path.join('results', 'visualizations')
     )

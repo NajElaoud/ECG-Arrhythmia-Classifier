@@ -1,7 +1,7 @@
 """
-ECG AI Project - Complete Starter Code with Proper Class Balancing
+ECG AI Project - Complete Code with Proper Class Balancing
 Dataset: PTB-XL (automatically downloaded)
-Models: CNN, LSTM, and hybrid architectures included
+Models: CNN, LSTM, and hybrid architectures included (using CUDA or CPU)
 """
 
 import os
@@ -337,7 +337,7 @@ class Hybrid_CNN_LSTM(nn.Module):
 # STEP 5: Training Functions
 # ============================================
 
-def train_model(model, train_loader, val_loader, num_epochs=50, lr=0.001, device='cuda'):
+def train_model(model, train_loader, val_loader, num_epochs=50, lr=0.001, device='cuda', model_name='best_ecg_model'):
     """
     Train the model
     """
@@ -387,7 +387,10 @@ def train_model(model, train_loader, val_loader, num_epochs=50, lr=0.001, device
         # Save best model
         if val_loss < best_val_loss:
             best_val_loss = val_loss
-            torch.save(model.state_dict(), 'best_ecg_model.pth')
+            model_dir = os.path.join('results', 'models')
+            os.makedirs(model_dir, exist_ok=True)
+            model_path = os.path.join(model_dir, f"{model_name}.pth")
+            torch.save(model.state_dict(), model_path)
     
     return train_losses, val_losses
 
@@ -528,14 +531,25 @@ def stratified_split(X, y, test_size=0.3, random_state=42):
 # ============================================
 
 if __name__ == "__main__":
-    # Set device
+    # Set device with GPU optimization
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Using device: {device}")
+    
+    # Print GPU info if available
+    if torch.cuda.is_available():
+        print(f"GPU Name: {torch.cuda.get_device_name(0)}")
+        print(f"GPU Count: {torch.cuda.device_count()}")
+        print(f"CUDA Version: {torch.version.cuda}")
+        # Enable cuDNN auto-tuner for better performance
+        torch.backends.cudnn.benchmark = True
+    else:
+        print("⚠ WARNING: CUDA not available. Training will be slow on CPU.")
+        print("Install CUDA-enabled PyTorch with: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121")
     
     # Configuration
     DATA_PATH = './ptbxl/'
     SAMPLING_RATE = 100  # Hz
-    BATCH_SIZE = 32
+    BATCH_SIZE = 32  # Increase if your GPU has enough memory
     NUM_EPOCHS = 50
     LEARNING_RATE = 0.001
     MIN_SAMPLES_PER_CLASS = 50  # Minimum samples required per class
@@ -608,7 +622,7 @@ if __name__ == "__main__":
     print("STEP 6: MODEL TRAINING")
     print("="*60)
     print("Choose model: 1=CNN, 2=LSTM, 3=Hybrid")
-    model_choice = 1  # Change this to select different models
+    model_choice = 3  # Change this to select different models
     
     if model_choice == 1:
         model = CNN_ECG(num_classes=len(target_classes), num_leads=12).to(device)
@@ -622,20 +636,31 @@ if __name__ == "__main__":
     
     # Check if model already exists
     SKIP_TRAINING = False  # Set to True to skip training and load existing model
-    
-    if SKIP_TRAINING and os.path.exists('best_ecg_model.pth'):
+    # model path under results/models
+    model_dir = os.path.join('results', 'models')
+    model_path = os.path.join(model_dir, 'best_ecg_model.pth')
+
+    if SKIP_TRAINING and os.path.exists(model_path):
         print("\n=== Loading Pre-trained Model ===")
-        model.load_state_dict(torch.load('best_ecg_model.pth', map_location=device))
+        model.load_state_dict(torch.load(model_path, map_location=device))
         print("Model loaded successfully!")
         train_losses = []
         val_losses = []
     else:
         print("\n=== Training Model ===")
+        # Clear GPU cache before training
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        
         # Train
         train_losses, val_losses = train_model(
             model, train_loader, val_loader, 
             num_epochs=NUM_EPOCHS, lr=LEARNING_RATE, device=device
         )
+        
+        # Clear GPU cache after training
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
         
         # Plot training history
         plot_training_history(train_losses, val_losses)
@@ -644,8 +669,8 @@ if __name__ == "__main__":
     print("\n" + "="*60)
     print("STEP 7: EVALUATING ON TEST SET")
     print("="*60)
-    if not SKIP_TRAINING or not os.path.exists('best_ecg_model.pth'):
-        model.load_state_dict(torch.load('best_ecg_model.pth', map_location=device))
+    if not SKIP_TRAINING or not os.path.exists(model_path):
+        model.load_state_dict(torch.load(model_path, map_location=device))
     predictions, labels, binary_preds = evaluate_model(model, test_loader, target_classes, device)
     
     # Step 9: Plot confusion matrices
@@ -654,7 +679,7 @@ if __name__ == "__main__":
     print("\n" + "="*60)
     print("TRAINING COMPLETE")
     print("="*60)
-    print(f"Model saved as: best_ecg_model.pth")
+    print(f"Model saved as: {model_path}")
     print(f"Number of classes: {len(target_classes)}")
     print(f"Classes: {', '.join(target_classes)}")
     
