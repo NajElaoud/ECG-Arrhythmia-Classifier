@@ -623,7 +623,7 @@ if __name__ == "__main__":
     print("STEP 6: MODEL TRAINING")
     print("="*60)
     print("Choose model: 1=CNN, 2=LSTM, 3=Hybrid")
-    model_choice = 1  # Change this to select different models
+    model_choice = 2  # Change this to select different models
     
     if model_choice == 1:
         model = CNN_ECG(num_classes=len(target_classes), num_leads=12).to(device)
