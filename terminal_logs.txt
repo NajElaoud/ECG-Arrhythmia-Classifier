@@ -56,59 +56,59 @@ STEP 5: VISUALIZING SAMPLE ECG
 STEP 6: MODEL TRAINING
 ============================================================
 Choose model: 1=CNN, 2=LSTM, 3=Hybrid
-Using CNN model
+Using LSTM model
 
 === Training Model ===
-Epoch 1/50 - Train Loss: 0.3893, Val Loss: 0.3581
-Epoch 2/50 - Train Loss: 0.3350, Val Loss: 0.3470
-Epoch 3/50 - Train Loss: 0.3199, Val Loss: 0.2994
-Epoch 4/50 - Train Loss: 0.3063, Val Loss: 0.2872
-Epoch 5/50 - Train Loss: 0.2990, Val Loss: 0.2888
-Epoch 6/50 - Train Loss: 0.2941, Val Loss: 0.2820
-Epoch 7/50 - Train Loss: 0.2871, Val Loss: 0.2886
-Epoch 8/50 - Train Loss: 0.2837, Val Loss: 0.2759
-Epoch 9/50 - Train Loss: 0.2825, Val Loss: 0.2872
-Epoch 10/50 - Train Loss: 0.2765, Val Loss: 0.2740
-Epoch 11/50 - Train Loss: 0.2739, Val Loss: 0.2739
-Epoch 12/50 - Train Loss: 0.2697, Val Loss: 0.3097
-Epoch 13/50 - Train Loss: 0.2660, Val Loss: 0.2738
-Epoch 14/50 - Train Loss: 0.2659, Val Loss: 0.2725
-Epoch 15/50 - Train Loss: 0.2603, Val Loss: 0.2773
-Epoch 16/50 - Train Loss: 0.2603, Val Loss: 0.2644
-Epoch 17/50 - Train Loss: 0.2562, Val Loss: 0.2659
-Epoch 18/50 - Train Loss: 0.2535, Val Loss: 0.2637
-Epoch 19/50 - Train Loss: 0.2543, Val Loss: 0.2759
-Epoch 20/50 - Train Loss: 0.2507, Val Loss: 0.2662
-Epoch 21/50 - Train Loss: 0.2447, Val Loss: 0.2682
-Epoch 22/50 - Train Loss: 0.2457, Val Loss: 0.2771
-Epoch 23/50 - Train Loss: 0.2424, Val Loss: 0.2598
-Epoch 24/50 - Train Loss: 0.2395, Val Loss: 0.2623
-Epoch 25/50 - Train Loss: 0.2393, Val Loss: 0.2618
-Epoch 26/50 - Train Loss: 0.2350, Val Loss: 0.2639
-Epoch 27/50 - Train Loss: 0.2326, Val Loss: 0.2741
-Epoch 28/50 - Train Loss: 0.2302, Val Loss: 0.2659
-Epoch 29/50 - Train Loss: 0.2287, Val Loss: 0.2796
-Epoch 30/50 - Train Loss: 0.2086, Val Loss: 0.2584
-Epoch 31/50 - Train Loss: 0.2036, Val Loss: 0.2602
-Epoch 32/50 - Train Loss: 0.2001, Val Loss: 0.2660
-Epoch 33/50 - Train Loss: 0.1989, Val Loss: 0.2593
-Epoch 34/50 - Train Loss: 0.1963, Val Loss: 0.2616
-Epoch 35/50 - Train Loss: 0.1944, Val Loss: 0.2600
-Epoch 36/50 - Train Loss: 0.1950, Val Loss: 0.2632
-Epoch 37/50 - Train Loss: 0.1928, Val Loss: 0.2606
-Epoch 38/50 - Train Loss: 0.1910, Val Loss: 0.2600
-Epoch 39/50 - Train Loss: 0.1911, Val Loss: 0.2617
-Epoch 40/50 - Train Loss: 0.1899, Val Loss: 0.2618
-Epoch 41/50 - Train Loss: 0.1907, Val Loss: 0.2624
-Epoch 42/50 - Train Loss: 0.1894, Val Loss: 0.2620
-Epoch 43/50 - Train Loss: 0.1905, Val Loss: 0.2609
-Epoch 44/50 - Train Loss: 0.1895, Val Loss: 0.2599
-Epoch 45/50 - Train Loss: 0.1892, Val Loss: 0.2615
-Epoch 46/50 - Train Loss: 0.1883, Val Loss: 0.2609
-Epoch 47/50 - Train Loss: 0.1898, Val Loss: 0.2627
-Epoch 48/50 - Train Loss: 0.1900, Val Loss: 0.2606
-Epoch 49/50 - Train Loss: 0.1888, Val Loss: 0.2614
-Epoch 50/50 - Train Loss: 0.1876, Val Loss: 0.2611
+Epoch 1/50 - Train Loss: 0.5428, Val Loss: 0.5102
+Epoch 2/50 - Train Loss: 0.5238, Val Loss: 0.5117
+Epoch 3/50 - Train Loss: 0.5099, Val Loss: 0.4898
+Epoch 4/50 - Train Loss: 0.4775, Val Loss: 0.4419
+Epoch 5/50 - Train Loss: 0.4152, Val Loss: 0.3762
+Epoch 6/50 - Train Loss: 0.3674, Val Loss: 0.3503
+Epoch 7/50 - Train Loss: 0.3404, Val Loss: 0.3265
+Epoch 8/50 - Train Loss: 0.3222, Val Loss: 0.3103
+Epoch 9/50 - Train Loss: 0.3089, Val Loss: 0.3056
+Epoch 10/50 - Train Loss: 0.2992, Val Loss: 0.2946
+Epoch 11/50 - Train Loss: 0.3004, Val Loss: 0.3088
+Epoch 12/50 - Train Loss: 0.4075, Val Loss: 0.3999
+Epoch 13/50 - Train Loss: 0.3974, Val Loss: 0.3510
+Epoch 14/50 - Train Loss: 0.3263, Val Loss: 0.3712
+Epoch 15/50 - Train Loss: 0.3669, Val Loss: 0.3715
+Epoch 16/50 - Train Loss: 0.3787, Val Loss: 0.3592
+Epoch 17/50 - Train Loss: 0.3430, Val Loss: 0.3384
+Epoch 18/50 - Train Loss: 0.3326, Val Loss: 0.3307
+Epoch 19/50 - Train Loss: 0.3249, Val Loss: 0.3288
+Epoch 20/50 - Train Loss: 0.3200, Val Loss: 0.3242
+Epoch 21/50 - Train Loss: 0.3141, Val Loss: 0.3214
+Epoch 22/50 - Train Loss: 0.3085, Val Loss: 0.3190
+Epoch 23/50 - Train Loss: 0.3030, Val Loss: 0.3175
+Epoch 24/50 - Train Loss: 0.3014, Val Loss: 0.3172
+Epoch 25/50 - Train Loss: 0.3008, Val Loss: 0.3169
+Epoch 26/50 - Train Loss: 0.3009, Val Loss: 0.3167
+Epoch 27/50 - Train Loss: 0.3003, Val Loss: 0.3164
+Epoch 28/50 - Train Loss: 0.3002, Val Loss: 0.3163
+Epoch 29/50 - Train Loss: 0.2999, Val Loss: 0.3162
+Epoch 30/50 - Train Loss: 0.2980, Val Loss: 0.3162
+Epoch 31/50 - Train Loss: 0.2994, Val Loss: 0.3162
+Epoch 32/50 - Train Loss: 0.2989, Val Loss: 0.3162
+Epoch 33/50 - Train Loss: 0.2997, Val Loss: 0.3161
+Epoch 34/50 - Train Loss: 0.2997, Val Loss: 0.3161
+Epoch 35/50 - Train Loss: 0.2988, Val Loss: 0.3161
+Epoch 36/50 - Train Loss: 0.2981, Val Loss: 0.3161
+Epoch 37/50 - Train Loss: 0.2985, Val Loss: 0.3161
+Epoch 38/50 - Train Loss: 0.2982, Val Loss: 0.3161
+Epoch 39/50 - Train Loss: 0.2978, Val Loss: 0.3161
+Epoch 40/50 - Train Loss: 0.2989, Val Loss: 0.3161
+Epoch 41/50 - Train Loss: 0.2984, Val Loss: 0.3161
+Epoch 42/50 - Train Loss: 0.2983, Val Loss: 0.3161
+Epoch 43/50 - Train Loss: 0.2982, Val Loss: 0.3161
+Epoch 44/50 - Train Loss: 0.2984, Val Loss: 0.3161
+Epoch 45/50 - Train Loss: 0.2978, Val Loss: 0.3161
+Epoch 46/50 - Train Loss: 0.2987, Val Loss: 0.3161
+Epoch 47/50 - Train Loss: 0.2995, Val Loss: 0.3161
+Epoch 48/50 - Train Loss: 0.2981, Val Loss: 0.3161
+Epoch 49/50 - Train Loss: 0.2990, Val Loss: 0.3161
+Epoch 50/50 - Train Loss: 0.2987, Val Loss: 0.3161
 
 ============================================================
 STEP 7: EVALUATING ON TEST SET
@@ -117,29 +117,29 @@ STEP 7: EVALUATING ON TEST SET
 === Classification Report ===
               precision    recall  f1-score   support
 
-        NORM       0.85      0.89      0.87      1427
-          MI       0.84      0.67      0.75       821
-        STTC       0.76      0.74      0.75       786
-          CD       0.85      0.69      0.76       735
-         HYP       0.79      0.48      0.59       397
+        NORM       0.86      0.83      0.84      1427
+          MI       0.74      0.68      0.70       821
+        STTC       0.77      0.67      0.71       786
+          CD       0.84      0.60      0.70       735
+         HYP       0.73      0.45      0.56       397
 
-   micro avg       0.83      0.74      0.78      4166
-   macro avg       0.82      0.69      0.74      4166
-weighted avg       0.82      0.74      0.78      4166
- samples avg       0.79      0.76      0.76      4166
+   micro avg       0.80      0.69      0.74      4166
+   macro avg       0.79      0.64      0.70      4166
+weighted avg       0.80      0.69      0.74      4166
+ samples avg       0.75      0.71      0.72      4166
 
 
 === AUC-ROC Scores ===
-NORM: 0.9548
-MI: 0.9394
-STTC: 0.9305
-CD: 0.9310
-HYP: 0.9165
+NORM: 0.9426
+MI: 0.9157
+STTC: 0.9146
+CD: 0.8926
+HYP: 0.8889
 
 ============================================================
 TRAINING COMPLETE
 ============================================================
-Model saved as: results\models\best_ecg_model_cnn.pth
+Model saved as: results\models\best_ecg_model_lstm.pth
 Number of classes: 5
 Classes: NORM, MI, STTC, CD, HYP
 
