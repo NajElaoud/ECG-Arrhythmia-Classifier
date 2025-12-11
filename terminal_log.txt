@@ -1,0 +1,186 @@
+Using device: cuda
+GPU Name: NVIDIA GeForce GTX 1650 Ti with Max-Q Design
+GPU Count: 1
+CUDA Version: 12.4
+
+============================================================
+STEP 1: LOADING PTB-XL DATASET
+============================================================
+Loading ECG signals...
+Loaded 21799 ECG records
+Signal shape: (21799, 1000, 12)
+
+============================================================
+STEP 2: PREPROCESSING LABELS
+============================================================
+
+=== Initial Label Distribution ===
+NORM: 9514 samples (43.64%)
+MI: 5469 samples (25.09%)
+STTC: 5235 samples (24.01%)
+CD: 4898 samples (22.47%)
+HYP: 2649 samples (12.15%)
+
+=== Final Classes Used (5 classes) ===
+NORM: 9514 samples (43.64%)
+MI: 5469 samples (25.09%)
+STTC: 5235 samples (24.01%)
+CD: 4898 samples (22.47%)
+HYP: 2649 samples (12.15%)
+
+============================================================
+STEP 3: SPLITTING DATA
+============================================================
+Using stratified split for multi-label data...
+Using stratified split for multi-label data...
+Train set: 15259 samples
+Validation set: 3270 samples
+Test set: 3270 samples
+
+=== Class Distribution in Splits ===
+NORM: Train=6660, Val=1427, Test=1427
+MI: Train=3828, Val=820, Test=821
+STTC: Train=3664, Val=785, Test=786
+CD: Train=3429, Val=734, Test=735
+HYP: Train=1854, Val=398, Test=397
+
+============================================================
+STEP 4: NORMALIZING SIGNALS
+============================================================
+
+============================================================
+STEP 5: VISUALIZING SAMPLE ECG
+============================================================
+
+============================================================
+STEP 6: MODEL TRAINING
+============================================================
+Choose model: 1=CNN, 2=LSTM, 3=Hybrid
+Using Hybrid CNN-LSTM model
+
+=== Training Model ===
+Epoch 1/50 - Train Loss: 0.4920, Val Loss: 0.4408
+Epoch 2/50 - Train Loss: 0.4547, Val Loss: 0.4117
+Epoch 3/50 - Train Loss: 0.4071, Val Loss: 0.3894
+Epoch 4/50 - Train Loss: 0.3730, Val Loss: 0.3479
+Epoch 5/50 - Train Loss: 0.3486, Val Loss: 0.3436
+Epoch 6/50 - Train Loss: 0.3373, Val Loss: 0.3269
+Epoch 7/50 - Train Loss: 0.3264, Val Loss: 0.3132
+Epoch 8/50 - Train Loss: 0.3158, Val Loss: 0.3129
+Epoch 9/50 - Train Loss: 0.3064, Val Loss: 0.3024
+Epoch 10/50 - Train Loss: 0.2998, Val Loss: 0.3007
+Epoch 11/50 - Train Loss: 0.2892, Val Loss: 0.3149
+Epoch 12/50 - Train Loss: 0.2817, Val Loss: 0.2943
+Epoch 13/50 - Train Loss: 0.2791, Val Loss: 0.2899
+Epoch 14/50 - Train Loss: 0.2706, Val Loss: 0.2945
+Epoch 15/50 - Train Loss: 0.2641, Val Loss: 0.2814
+Epoch 16/50 - Train Loss: 0.2598, Val Loss: 0.2884
+Epoch 17/50 - Train Loss: 0.2534, Val Loss: 0.2835
+Epoch 18/50 - Train Loss: 0.2481, Val Loss: 0.2815
+Epoch 19/50 - Train Loss: 0.2414, Val Loss: 0.2796
+Epoch 20/50 - Train Loss: 0.2362, Val Loss: 0.2819
+Epoch 21/50 - Train Loss: 0.2325, Val Loss: 0.2875
+Epoch 22/50 - Train Loss: 0.2253, Val Loss: 0.2853
+Epoch 23/50 - Train Loss: 0.2191, Val Loss: 0.2921
+Epoch 24/50 - Train Loss: 0.2120, Val Loss: 0.2948
+Epoch 25/50 - Train Loss: 0.2076, Val Loss: 0.2951
+Epoch 26/50 - Train Loss: 0.1793, Val Loss: 0.2957
+Epoch 27/50 - Train Loss: 0.1695, Val Loss: 0.3020
+Epoch 28/50 - Train Loss: 0.1659, Val Loss: 0.3084
+Epoch 29/50 - Train Loss: 0.1622, Val Loss: 0.3077
+Epoch 30/50 - Train Loss: 0.1585, Val Loss: 0.3152
+Epoch 31/50 - Train Loss: 0.1562, Val Loss: 0.3184
+Epoch 32/50 - Train Loss: 0.1510, Val Loss: 0.3175
+Epoch 33/50 - Train Loss: 0.1506, Val Loss: 0.3189
+Epoch 34/50 - Train Loss: 0.1495, Val Loss: 0.3187
+Epoch 35/50 - Train Loss: 0.1492, Val Loss: 0.3212
+Epoch 36/50 - Train Loss: 0.1484, Val Loss: 0.3232
+Epoch 37/50 - Train Loss: 0.1506, Val Loss: 0.3226
+Epoch 38/50 - Train Loss: 0.1480, Val Loss: 0.3235
+Epoch 39/50 - Train Loss: 0.1480, Val Loss: 0.3243
+Epoch 40/50 - Train Loss: 0.1490, Val Loss: 0.3236
+Epoch 41/50 - Train Loss: 0.1485, Val Loss: 0.3230
+Epoch 42/50 - Train Loss: 0.1491, Val Loss: 0.3252
+Epoch 43/50 - Train Loss: 0.1480, Val Loss: 0.3238
+Epoch 44/50 - Train Loss: 0.1492, Val Loss: 0.3218
+Epoch 45/50 - Train Loss: 0.1487, Val Loss: 0.3232
+Epoch 46/50 - Train Loss: 0.1488, Val Loss: 0.3235
+Epoch 47/50 - Train Loss: 0.1486, Val Loss: 0.3228
+Epoch 48/50 - Train Loss: 0.1481, Val Loss: 0.3235
+Epoch 49/50 - Train Loss: 0.1473, Val Loss: 0.3233
+Epoch 50/50 - Train Loss: 0.1482, Val Loss: 0.3233
+
+============================================================
+STEP 7: EVALUATING ON TEST SET
+============================================================
+
+=== Classification Report ===
+              precision    recall  f1-score   support
+
+        NORM       0.84      0.88      0.86      1427
+          MI       0.75      0.71      0.73       821
+        STTC       0.75      0.69      0.72       786
+          CD       0.87      0.65      0.75       735
+         HYP       0.72      0.46      0.56       397
+
+   micro avg       0.80      0.73      0.76      4166
+   macro avg       0.79      0.68      0.72      4166
+weighted avg       0.80      0.73      0.76      4166
+ samples avg       0.78      0.75      0.75      4166
+
+
+=== AUC-ROC Scores ===
+NORM: 0.9487
+MI: 0.9213
+STTC: 0.9205
+CD: 0.9195
+HYP: 0.8981
+
+============================================================
+TRAINING COMPLETE
+============================================================
+Model saved as: results\models\best_ecg_model_hybrid.pth
+Number of classes: 5
+Classes: NORM, MI, STTC, CD, HYP
+
+============================================================
+STEP 8: GENERATING COMPREHENSIVE VISUALIZATIONS
+============================================================
+Collecting predictions from test set...
+
+============================================================
+GENERATING VISUALIZATIONS
+============================================================
+
+[1/6] Creating 2 detailed ECG dashboards...
+   ✓ Saved: results\visualizations\01_ecg_dashboard_1.png
+   ✓ Saved: results\visualizations\01_ecg_dashboard_2.png
+
+[2/6] Creating batch overview...
+   ✓ Saved: results\visualizations\02_batch_overview.png
+
+[3/6] Creating ROC curves...
+   ✓ Saved: results\visualizations\03_roc_curves.png
+
+[4/6] Creating Precision-Recall curves...
+   ✓ Saved: results\visualizations\04_precision_recall.png
+
+[5/6] Creating confusion matrices...
+   ✓ Saved: results\visualizations\05_confusion_matrices.png
+
+[6/6] Creating signal characteristics...
+   ✓ Saved: results\visualizations\06_signal_characteristics.png
+
+============================================================
+✓ ALL VISUALIZATIONS COMPLETE!
+============================================================
+
+Generated files:
+  01_ecg_dashboard_*.png       - Detailed individual analyses
+  02_batch_overview.png         - Batch predictions
+  03_roc_curves.png             - ROC curves (all classes)
+  04_precision_recall.png       - Precision-Recall curves
+  05_confusion_matrices.png     - Performance metrics
+  06_signal_characteristics.png - Average patterns by class
+
+All files saved at 300 DPI - Publication ready!

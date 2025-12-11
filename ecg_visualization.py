@@ -412,7 +412,7 @@ def plot_signal_characteristics(ecg_signals, labels,
 # MAIN VISUALIZATION FUNCTION
 # ============================================
 
-def visualize_model_results(model, test_loader, device='cuda', num_detailed=2):
+def visualize_model_results(model, test_loader, device='cuda', num_detailed=2, output_dir='results/visualizations'):
     """
     Generate all visualizations with proper spacing
     
@@ -449,6 +449,9 @@ def visualize_model_results(model, test_loader, device='cuda', num_detailed=2):
     print("\n" + "="*60)
     print("GENERATING VISUALIZATIONS")
     print("="*60)
+    # Ensure output directory exists
+    import os
+    os.makedirs(output_dir, exist_ok=True)
     
     # 1. Detailed individual analyses
     print(f"\n[1/6] Creating {num_detailed} detailed ECG dashboards...")
@@ -456,48 +459,54 @@ def visualize_model_results(model, test_loader, device='cuda', num_detailed=2):
         fig = plot_single_ecg_analysis(all_signals[i], all_preds[i], 
                                        all_labels[i], class_names)
         filename = f'01_ecg_dashboard_{i+1}.png'
-        fig.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
-        print(f"   ✓ Saved: {filename}")
+        outpath = os.path.join(output_dir, filename)
+        fig.savefig(outpath, dpi=300, bbox_inches='tight', facecolor='white')
+        print(f"   ✓ Saved: {outpath}")
         plt.close(fig)
     
     # 2. Batch overview
     print("\n[2/6] Creating batch overview...")
     fig = plot_batch_overview(all_signals, all_preds, all_labels, class_names, num_samples=6)
     filename = '02_batch_overview.png'
-    fig.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
-    print(f"   ✓ Saved: {filename}")
+    outpath = os.path.join(output_dir, filename)
+    fig.savefig(outpath, dpi=300, bbox_inches='tight', facecolor='white')
+    print(f"   ✓ Saved: {outpath}")
     plt.close(fig)
     
     # 3. ROC curves
     print("\n[3/6] Creating ROC curves...")
     fig = plot_roc_curves(all_labels, all_preds, class_names)
     filename = '03_roc_curves.png'
-    fig.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
-    print(f"   ✓ Saved: {filename}")
+    outpath = os.path.join(output_dir, filename)
+    fig.savefig(outpath, dpi=300, bbox_inches='tight', facecolor='white')
+    print(f"   ✓ Saved: {outpath}")
     plt.close(fig)
     
     # 4. Precision-Recall curves
     print("\n[4/6] Creating Precision-Recall curves...")
     fig = plot_precision_recall(all_labels, all_preds, class_names)
     filename = '04_precision_recall.png'
-    fig.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
-    print(f"   ✓ Saved: {filename}")
+    outpath = os.path.join(output_dir, filename)
+    fig.savefig(outpath, dpi=300, bbox_inches='tight', facecolor='white')
+    print(f"   ✓ Saved: {outpath}")
     plt.close(fig)
     
     # 5. Confusion matrices
     print("\n[5/6] Creating confusion matrices...")
     fig = plot_confusion_matrices(all_labels, all_preds, class_names)
     filename = '05_confusion_matrices.png'
-    fig.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
-    print(f"   ✓ Saved: {filename}")
+    outpath = os.path.join(output_dir, filename)
+    fig.savefig(outpath, dpi=300, bbox_inches='tight', facecolor='white')
+    print(f"   ✓ Saved: {outpath}")
     plt.close(fig)
     
     # 6. Signal characteristics
     print("\n[6/6] Creating signal characteristics...")
     fig = plot_signal_characteristics(all_signals, all_labels, class_names)
     filename = '06_signal_characteristics.png'
-    fig.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
-    print(f"   ✓ Saved: {filename}")
+    outpath = os.path.join(output_dir, filename)
+    fig.savefig(outpath, dpi=300, bbox_inches='tight', facecolor='white')
+    print(f"   ✓ Saved: {outpath}")
     plt.close(fig)
     
     print("\n" + "="*60)
@@ -513,7 +522,7 @@ def visualize_model_results(model, test_loader, device='cuda', num_detailed=2):
     print("\nAll files saved at 300 DPI - Publication ready!")
 
 # ============================================
-# USAGE EXAMPLE
+# USAGE CODE
 # ============================================
 
 if __name__ == "__main__":
